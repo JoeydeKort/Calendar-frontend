@@ -1,0 +1,47 @@
+<div id="calendar"></div>
+<div class="button-container">
+  <button (click)="openAddEventPopup()">Add Event</button>
+</div>
+
+<div id="addEventPopup" class="popup">
+  <h2>Add Event</h2>
+  <form (submit)="saveEvent()">
+    <label for="title">Title:</label>
+    <input
+      type="text"
+      id="title"
+      name="title"
+      [(ngModel)]="eventData.title"
+      required
+    />
+
+    <label for="description">Description:</label>
+    <input
+      type="text"
+      id="description"
+      name="description"
+      [(ngModel)]="eventData.description"
+    />
+
+    <label for="startDateTime">Start Date and Time:</label>
+    <input
+      type="datetime-local"
+      id="startDateTime"
+      name="startDateTime"
+      [(ngModel)]="eventData.startDateTime"
+      required
+    />
+
+    <label for="endDateTime">End Date and Time:</label>
+    <input
+      type="datetime-local"
+      id="endDateTime"
+      name="endDateTime"
+      [(ngModel)]="eventData.endDateTime"
+      required
+    />
+
+    <button type="submit">Save</button>
+    <button type="button" (click)="closeAddEventPopup()">Cancel</button>
+  </form>
+</div>
