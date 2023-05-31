@@ -44,7 +44,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.calendarService.addEvent(this.eventData).subscribe(
       (response) => {
         this.renderCalendar();
-        this.openAddEventPopup;
+        this.openAddEventPopup();
+        this.eventData = {};
       },
       (error) => {
         console.error(error);
