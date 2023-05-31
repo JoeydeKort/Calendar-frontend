@@ -32,25 +32,23 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   }
 
   openAddEventPopup(): void {
-    this.eventData = {};
     const popup = document.getElementById('addEventPopup') as HTMLElement;
-    popup.style.display = 'block';
+    if (popup.style.display === 'block') {
+      popup.style.display = 'none';
+    } else {
+      popup.style.display = 'block';
+    }
   }
 
   saveEvent(): void {
     this.calendarService.addEvent(this.eventData).subscribe(
       (response) => {
         this.renderCalendar();
-        this.closeAddEventPopup();
+        this.openAddEventPopup;
       },
       (error) => {
         console.error(error);
       }
     );
-  }
-
-  closeAddEventPopup(): void {
-    const popup = document.getElementById('addEventPopup') as HTMLElement;
-    popup.style.display = 'none';
   }
 }
