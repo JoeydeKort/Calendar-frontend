@@ -26,7 +26,7 @@ export class EventService {
   }
 
   getEvents(): Observable<any[]> {
-    const url = `${this.apiUrl}/events`;
+    const url = `${this.apiUrl}/getTasks`;
     return this.http.get<any[]>(url);
   }
 }

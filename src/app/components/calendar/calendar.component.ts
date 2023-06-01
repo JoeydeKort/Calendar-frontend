@@ -11,8 +11,11 @@ import { EventService } from '../../event.service';
 })
 export class CalendarComponent implements OnInit, AfterViewInit {
   eventData: any = {};
+  eventService: any;
 
-  constructor(private calendarService: EventService) {}
+  constructor(private calendarService: EventService) {
+    this.eventService = calendarService;
+  }
 
   ngOnInit(): void {}
 
@@ -27,6 +30,23 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     const calendar = new Calendar(calendarEl, {
       plugins: [dayGridPlugin, timeGridPlugin],
       initialView: 'dayGridMonth',
+      events: (fetchInfo, successCallback, failureCallback) => {
+        this.eventService.getEvents().subscribe(
+          (events: any[]) => {
+            const formattedEvents = events.map((event: any) => ({
+              id: event.id.toString(),
+              title: event.title,
+              start: new Date(event.startDateTime).toISOString(),
+              end: new Date(event.endDateTime).toISOString(),
+            }));
+            successCallback(formattedEvents);
+          },
+          (error: Error) => {
+            console.error(error);
+            failureCallback(error);
+          }
+        );
+      },
     });
     calendar.render();
   }
