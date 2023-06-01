@@ -11,17 +11,17 @@ export class EventService {
   constructor(private http: HttpClient) {}
 
   addEvent(eventData: any): Observable<any> {
-    const url = `${this.apiUrl}/addEvent`;
+    const url = `${this.apiUrl}/addTask`;
     return this.http.post<any>(url, eventData);
   }
 
   updateEvent(eventId: string, eventData: any): Observable<any> {
-    const url = `${this.apiUrl}/events/${eventId}`;
+    const url = `${this.apiUrl}/updateTask/${eventId}`;
     return this.http.put<any>(url, eventData);
   }
 
   deleteEvent(eventId: string): Observable<any> {
-    const url = `${this.apiUrl}/events/${eventId}`;
+    const url = `${this.apiUrl}/deleteTask/${eventId}`;
     return this.http.delete<any>(url);
   }
 
